@@ -10,6 +10,11 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import com.example.test.ui.theme.Animal
+import com.example.test.ui.theme.Dog
+import com.example.test.ui.theme.Duck
+import com.example.test.ui.theme.Flyable
+import com.example.test.ui.theme.Swimable
 import com.example.test.ui.theme.TestTheme
 
 class MainActivity : ComponentActivity() {
@@ -20,23 +25,23 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         //setContentView(R.layout.main_activity)
 
-
+        var v1: String? = "fgfg"
+        v1 = null
             ///testus
 
             ///testus2
 
-
-            var v2 = 4.5f
-
-            v2 = 4.5f
-
             //val v4 = sum(c =5.6, a = 4.5 )
             val v5 = myOuterFun(4, ::myInnerFun)
-            val v6 = myOuterFun(3, {
+            val v6 = myOuterFun(3) {
                 //dfdfd
                 it
                 return@myOuterFun "fgfgf"
-            })
+            }
+
+        val duck: Duck = Duck("Tom", 3)
+        duck.maxDuration
+        val isSwim = duck.swim(43)
     }
 
     fun myOuterFun(number:Int, innerFun:(myString: String) -> String):Int{
