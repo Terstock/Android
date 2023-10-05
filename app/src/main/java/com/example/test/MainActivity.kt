@@ -15,10 +15,14 @@ import com.example.test.ui.theme.AuthError
 import com.example.test.ui.theme.Direction
 import com.example.test.ui.theme.Dog
 import com.example.test.ui.theme.Duck
+import com.example.test.ui.theme.Figure
+import com.example.test.ui.theme.Fish
 import com.example.test.ui.theme.Flyable
+import com.example.test.ui.theme.Person
 import com.example.test.ui.theme.Swimable
 import com.example.test.ui.theme.TestTheme
 import com.example.test.ui.theme.UserModel
+import com.example.test.ui.theme.sealed2
 
 class MainActivity : ComponentActivity() {
 
@@ -42,8 +46,8 @@ class MainActivity : ComponentActivity() {
             return@myOuterFun "fgfgf"
         }
 
-        val duck: Duck = Duck("Tom", 3)
-        val dog: Dog = Dog("Andreq", 1)
+        val duck: Duck = Duck("Tom", 3, 4)
+        val dog: Dog = Dog("Andreq", 1, 8)
         duck.maxDuration
         val isSwim = duck.swim(43)
 
@@ -53,7 +57,7 @@ class MainActivity : ComponentActivity() {
         animals[0]
         animals.get(1)
 
-        list.add(Dog("Rex", 5))
+        list.add(Dog("Rex", 5, 12))
         list.addAll(animals)
 
         list.forEach { a ->
@@ -75,10 +79,13 @@ class MainActivity : ComponentActivity() {
         val names: List<Dog> = list.map {
             val d = Dog(
                 it.name,
-                it.age
+                it.age,
+                it.weight
             )
             d
         }
+
+        val fish: Fish = Fish("Yoko", 1, 2)
 
 
         val user = UserModel(
@@ -100,9 +107,7 @@ class MainActivity : ComponentActivity() {
                 //sasas
             }
 
-            Direction.EAST -> {
-                //fffws
-            }
+            Direction.EAST -> myInnerFun("assa")
         }
 
         val error = getError()
@@ -114,6 +119,83 @@ class MainActivity : ComponentActivity() {
 
 
             }
+        }
+
+        fun exercise() {
+
+            //Цикл While:
+            var i = 12
+            while (i <= 5) {
+                println("Повторення $i")
+                i++
+
+                //Цикл do-while:
+                var i = 1
+                do {
+                    println("Повторення $i")
+                    i++
+                } while (i <= 5)
+            }
+        }
+
+
+        // Створення екземпляра класу Person
+        fun people() {
+            val pers: Person = Person("Іван", 30)
+
+            // Виклик функції представитися() для екземпляра особи
+            pers.represent()
+        }
+
+
+        val figures = listOf(
+            Figure(50, 100),
+            Figure(2, 7),
+            Figure(3, 3)
+        )
+
+        // Рахуємо загальну суму полів area в циклі
+        var totalArea = 0
+        for (figure in figures) {
+         totalArea += figure.area
+         }
+        //  println("Загальна площа усіх фігур: $totalArea")
+
+
+
+
+        //працюємо з sealed class Shape
+        val shapes = listOf(
+            sealed2.Rectangle(3, 5),
+            sealed2.Oval(4, 6),
+            sealed2.Line(10),
+            sealed2.Rectangle(2, 4),
+            sealed2.Line(7),
+            sealed2.Oval(3, 3)
+        )
+        val rectanglesCount = shapes.filterIsInstance<sealed2.Rectangle>().size
+        val ovalsCount = shapes.filterIsInstance<sealed2.Oval>().size
+        val linesCount = shapes.filterIsInstance<sealed2.Line>().size
+
+        //   println("Кількість Rectangle: $rectanglesCount")
+        //   println("Кількість Oval: $ovalsCount")
+        //   println("Кількість Line: $linesCount")
+
+        var rectanglesCountWhen = 0
+        var ovalsCountWhen = 0
+        var linesCountWhen = 0
+
+        for (shape in shapes) {
+            when (shape) {
+                is sealed2.Rectangle -> rectanglesCountWhen++
+                is sealed2.Oval -> ovalsCountWhen++
+                is sealed2.Line -> linesCountWhen++
+            }
+
+            //   println("Кількість Rectangle (з використанням when): $rectanglesCountWhen")
+            //   println("Кількість Oval (з використанням when): $ovalsCountWhen")
+            //   println("Кількість Line (з використанням when): $linesCountWhen")
+
         }
     }
 
@@ -127,7 +209,20 @@ class MainActivity : ComponentActivity() {
         }
 
 
-        fun getError(): AuthError {
+
+
+
+
+
+
+
+
+
+
+
+
+
+    fun getError(): AuthError {
             val v = 1
 
             if (v > 3) {

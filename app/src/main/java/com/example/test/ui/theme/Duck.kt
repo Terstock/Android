@@ -1,10 +1,11 @@
 package com.example.test.ui.theme
 
-class Duck(name: String, age: Int): Animal(name, age), Flyable, Swimable {
+class Duck(name: String, age: Int, weight: Int): Animal(name, age, weight), Flyable, Swimable, Growing, Voicing {
 
     val maxDuration = 30
     private val maxFlyDuration =  20
     private val maxSwimDuration =  20
+    private val maxWeight = 5
     override fun move(duration: Int): Boolean {
         return duration <= maxDuration
     }
@@ -17,7 +18,16 @@ class Duck(name: String, age: Int): Animal(name, age), Flyable, Swimable {
         return duration < maxSwimDuration
     }
 
-    fun eat():Int? {
+    override fun grow(duration: Int): Boolean {
+        return duration == maxWeight
+    }
+
+    override fun quietvoice() {
+        super.quietvoice()
+    }
+
+
+    fun eat(): Int? {
     return null
     }
 }
